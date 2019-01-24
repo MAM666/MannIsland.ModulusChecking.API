@@ -41,16 +41,16 @@ namespace MannIsland.ModulusChecking.API.FileAccess
 
             //populate the weight
             int max = fields.Count();
-            if (max > 14) max = 14;
+            // is there an exception code
+            if (max > 17)
+            {
+                modulusweight.ExceptionRule = Convert.ToInt16(fields[17]);
+                max = 17;
+
+            }
             for (int i = 3; i < max; i++)
             {
                 modulusweight.Weight.Add(Convert.ToInt16(fields[i]));
-            }
-
-            // is there an exception code
-            if (fields.Count() > 14)
-            {
-                modulusweight.ExceptionRule = Convert.ToInt16(fields[14]);
             }
 
             // add it to the list.
