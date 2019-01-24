@@ -9,6 +9,10 @@ namespace MannIsland.ModulusChecking.API.Services
     //
     public class ModulusWeightService : IModulusWeightService
     {
+        // list of rules that are not used in the GetExceptionRule
+        public List<string> ExceptionRulesNotApplied { get { return _exceptionRulesNotApplied; } }
+        public List<string> _exceptionRulesNotApplied = new List<String>();
+
         public ModulusWeightService()
         {
         }
@@ -159,6 +163,7 @@ namespace MannIsland.ModulusChecking.API.Services
             {
                 // were not validating any other exception rules
                 // feed the exceptionRule back to the API.
+                _exceptionRulesNotApplied.Add(exceptionRule.ToString());
             }
 
             return exceptionRule;

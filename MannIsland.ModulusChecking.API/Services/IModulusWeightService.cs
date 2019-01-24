@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace MannIsland.ModulusChecking.API.Services
 {
     /// <summary>
@@ -6,6 +8,8 @@ namespace MannIsland.ModulusChecking.API.Services
     /// </summary>
     public interface IModulusWeightService
     {
+        List<string> ExceptionRulesNotApplied { get; }
+
         string Validate(string sortcode, string accountNumber);
 
     }
