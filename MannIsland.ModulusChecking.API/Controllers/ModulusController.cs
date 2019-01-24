@@ -1,4 +1,5 @@
-﻿using MannIsland.ModulusChecking.API.Services;
+﻿using MannIsland.ModulusChecking.API.ExtensionMethods;
+using MannIsland.ModulusChecking.API.Services;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -10,6 +11,12 @@ namespace MannIsland.ModulusChecking.API.Controllers
     {
 
         private readonly IModulusWeightService _modulusWeightService;
+
+        //only required for web api when not using fac.
+        public ModulusController()
+        {
+            _modulusWeightService = new ModulusWeightService();
+        }
 
         public ModulusController(IModulusWeightService modulusWeightService)
         {
@@ -32,7 +39,7 @@ namespace MannIsland.ModulusChecking.API.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-            return Request.CreateResponse(_modulusWeightService.Validate(sortcode, accountNumber));
+            return Request.CreateResponse(JSONBuilder.ToJSON(_modulusWeightService.Validate(sortcode, accountNumber), _modulusWeightService.ExceptionRulesNotApplied));
         }
     }
 
